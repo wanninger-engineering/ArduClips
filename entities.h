@@ -83,7 +83,7 @@ struct clipsLexeme
   {
    TypeHeader header;
    CLIPSLexeme *next;
-   unsigned int count;
+   long count;
    unsigned int permanent : 1;
    unsigned int markedEphemeral : 1;
    unsigned int neededSymbol : 1;
@@ -98,12 +98,12 @@ struct clipsFloat
   {
    TypeHeader header;
    CLIPSFloat *next;
-   unsigned int count;
+   long count;
    unsigned int permanent : 1;
    unsigned int markedEphemeral : 1;
    unsigned int neededFloat : 1;
    unsigned int bucket : 29;
-   float contents;
+   double contents;
   };
 
 /****************/
@@ -113,12 +113,12 @@ struct clipsInteger
   {
    TypeHeader header;
    CLIPSInteger *next;
-   unsigned int count;
+   long count;
    unsigned int permanent : 1;
    unsigned int markedEphemeral : 1;
    unsigned int neededInteger : 1;
    unsigned int bucket : 29;
-   long contents;
+   long long contents;
   };
 
 /***************/
@@ -128,7 +128,7 @@ struct clipsBitMap
   {
    TypeHeader header;
    CLIPSBitMap *next;
-   unsigned int count;
+   long count;
    unsigned int permanent : 1;
    unsigned int markedEphemeral : 1;
    unsigned int neededBitMap : 1;
@@ -144,7 +144,7 @@ struct clipsExternalAddress
   {
    TypeHeader header;
    CLIPSExternalAddress *next;
-   unsigned int count;
+   long count;
    unsigned int permanent : 1;
    unsigned int markedEphemeral : 1;
    unsigned int neededPointer : 1;

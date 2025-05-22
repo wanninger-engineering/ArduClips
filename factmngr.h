@@ -156,7 +156,7 @@ struct fact
      };
    Deftemplate *whichDeftemplate;
    void *list;
-   long factIndex;
+   long long factIndex;
    unsigned long hashValue;
    unsigned int garbage : 1;
    Fact *previousFact;
@@ -196,7 +196,7 @@ struct factsData
    Fact *GarbageFacts;
    Fact *LastFact;
    Fact *FactList;
-   long NextFactIndex;
+   long long NextFactIndex;
    unsigned long NumberOfFacts;
    struct callFunctionItemWithArg *ListOfAssertFunctions;
    struct callFunctionItemWithArg *ListOfRetractFunctions;

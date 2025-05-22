@@ -111,6 +111,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include "setup.h"
 
@@ -152,7 +153,7 @@ struct miscFunctionData
    static void                    ExpandFuncMultifield(Environment *,UDFValue *,Expression *,
                                                        Expression **,void *);
    static int                     FindLanguageType(Environment *,const char *);
-  //  static void                    ConvertTime(Environment *,UDFValue *,struct tm *);
+   static void                    ConvertTime(Environment *,UDFValue *,struct tm *);
 
 /*****************************************************************/
 /* MiscFunctionDefinitions: Initializes miscellaneous functions. */
@@ -166,44 +167,44 @@ void MiscFunctionDefinitions(
    Retain(theEnv,MiscFunctionData(theEnv)->errorCode.header);
 
 #if ! RUN_TIME
-//   AddUDF(theEnv,"exit","v",0,1,"l",ExitCommand,"ExitCommand",NULL);
-//
-//   AddUDF(theEnv,"gensym","y",0,0,NULL,GensymFunction,"GensymFunction",NULL);
-//   AddUDF(theEnv,"gensym*","y",0,0,NULL,GensymStarFunction,"GensymStarFunction",NULL);
-//   AddUDF(theEnv,"setgen","l",1,1,"l",SetgenFunction,"SetgenFunction",NULL);
-//
-//   AddUDF(theEnv,"system","ly",0,UNBOUNDED,"sy",SystemCommand,"SystemCommand",NULL);
-//   AddUDF(theEnv,"length$","l",1,1,"m",LengthFunction,"LengthFunction",NULL);
-//   AddUDF(theEnv,"time","d",0,0,NULL,TimeFunction,"TimeFunction",NULL);
-//   AddUDF(theEnv,"local-time","m",0,0,NULL,LocalTimeFunction,"LocalTimeFunction",NULL);
-//   AddUDF(theEnv,"gm-time","m",0,0,NULL,GMTimeFunction,"GMTimeFunction",NULL);
-//
-//   AddUDF(theEnv,"random","l",0,2,"l",RandomFunction,"RandomFunction",NULL);
-//   AddUDF(theEnv,"seed","v",1,1,"l",SeedFunction,"SeedFunction",NULL);
-//   AddUDF(theEnv,"conserve-mem","v",1,1,"y",ConserveMemCommand,"ConserveMemCommand",NULL);
-//   AddUDF(theEnv,"release-mem","l",0,0,NULL,ReleaseMemCommand,"ReleaseMemCommand",NULL);
+   AddUDF(theEnv,"exit","v",0,1,"l",ExitCommand,"ExitCommand",NULL);
+
+   AddUDF(theEnv,"gensym","y",0,0,NULL,GensymFunction,"GensymFunction",NULL);
+   AddUDF(theEnv,"gensym*","y",0,0,NULL,GensymStarFunction,"GensymStarFunction",NULL);
+   AddUDF(theEnv,"setgen","l",1,1,"l",SetgenFunction,"SetgenFunction",NULL);
+
+   AddUDF(theEnv,"system","ly",0,UNBOUNDED,"sy",SystemCommand,"SystemCommand",NULL);
+   AddUDF(theEnv,"length$","l",1,1,"m",LengthFunction,"LengthFunction",NULL);
+   AddUDF(theEnv,"time","d",0,0,NULL,TimeFunction,"TimeFunction",NULL);
+   AddUDF(theEnv,"local-time","m",0,0,NULL,LocalTimeFunction,"LocalTimeFunction",NULL);
+   AddUDF(theEnv,"gm-time","m",0,0,NULL,GMTimeFunction,"GMTimeFunction",NULL);
+
+   AddUDF(theEnv,"random","l",0,2,"l",RandomFunction,"RandomFunction",NULL);
+   AddUDF(theEnv,"seed","v",1,1,"l",SeedFunction,"SeedFunction",NULL);
+   AddUDF(theEnv,"conserve-mem","v",1,1,"y",ConserveMemCommand,"ConserveMemCommand",NULL);
+   AddUDF(theEnv,"release-mem","l",0,0,NULL,ReleaseMemCommand,"ReleaseMemCommand",NULL);
 #if DEBUGGING_FUNCTIONS
    AddUDF(theEnv,"mem-used","l",0,0,NULL,MemUsedCommand,"MemUsedCommand",NULL);
    AddUDF(theEnv,"mem-requests","l",0,0,NULL,MemRequestsCommand,"MemRequestsCommand",NULL);
 #endif
 
-//   AddUDF(theEnv,"options","v",0,0,NULL,OptionsCommand,"OptionsCommand",NULL);
-//
-//   AddUDF(theEnv,"operating-system","y",0,0,NULL,OperatingSystemFunction,"OperatingSystemFunction",NULL);
-//   AddUDF(theEnv,"(expansion-call)","*",0,UNBOUNDED,NULL,ExpandFuncCall,"ExpandFuncCall",NULL);
-//   AddUDF(theEnv,"expand$","*",1,1,"m",DummyExpandFuncMultifield,"DummyExpandFuncMultifield",NULL);
-//   FuncSeqOvlFlags(theEnv,"expand$",false,false);
-//   AddUDF(theEnv,"(set-evaluation-error)","y",0,0,NULL,CauseEvaluationError,"CauseEvaluationError",NULL);
-//   AddUDF(theEnv,"set-sequence-operator-recognition","b",1,1,"y",SetSORCommand,"SetSORCommand",NULL);
-//   AddUDF(theEnv,"get-sequence-operator-recognition","b",0,0,NULL,GetSORCommand,"GetSORCommand",NULL);
-//   AddUDF(theEnv,"get-function-restrictions","s",1,1,"y",GetFunctionRestrictions,"GetFunctionRestrictions",NULL);
-//   AddUDF(theEnv,"create$","m",0,UNBOUNDED,NULL,CreateFunction,"CreateFunction",NULL);
-//   AddUDF(theEnv,"apropos","v",1,1,"y",AproposCommand,"AproposCommand",NULL);
-//   AddUDF(theEnv,"get-function-list","m",0,0,NULL,GetFunctionListFunction,"GetFunctionListFunction",NULL);
-//   AddUDF(theEnv,"funcall","*",1,UNBOUNDED,"*;sy",FuncallFunction,"FuncallFunction",NULL);
-//   AddUDF(theEnv,"new","*",1,UNBOUNDED,"*;y",NewFunction,"NewFunction",NULL);
-//   AddUDF(theEnv,"call","*",1,UNBOUNDED,"*",CallFunction,"CallFunction",NULL);
-//   AddUDF(theEnv,"timer","d",0,UNBOUNDED,NULL,TimerFunction,"TimerFunction",NULL);
+   AddUDF(theEnv,"options","v",0,0,NULL,OptionsCommand,"OptionsCommand",NULL);
+
+   AddUDF(theEnv,"operating-system","y",0,0,NULL,OperatingSystemFunction,"OperatingSystemFunction",NULL);
+   AddUDF(theEnv,"(expansion-call)","*",0,UNBOUNDED,NULL,ExpandFuncCall,"ExpandFuncCall",NULL);
+   AddUDF(theEnv,"expand$","*",1,1,"m",DummyExpandFuncMultifield,"DummyExpandFuncMultifield",NULL);
+   FuncSeqOvlFlags(theEnv,"expand$",false,false);
+   AddUDF(theEnv,"(set-evaluation-error)","y",0,0,NULL,CauseEvaluationError,"CauseEvaluationError",NULL);
+   AddUDF(theEnv,"set-sequence-operator-recognition","b",1,1,"y",SetSORCommand,"SetSORCommand",NULL);
+   AddUDF(theEnv,"get-sequence-operator-recognition","b",0,0,NULL,GetSORCommand,"GetSORCommand",NULL);
+   AddUDF(theEnv,"get-function-restrictions","s",1,1,"y",GetFunctionRestrictions,"GetFunctionRestrictions",NULL);
+   AddUDF(theEnv,"create$","m",0,UNBOUNDED,NULL,CreateFunction,"CreateFunction",NULL);
+   AddUDF(theEnv,"apropos","v",1,1,"y",AproposCommand,"AproposCommand",NULL);
+   AddUDF(theEnv,"get-function-list","m",0,0,NULL,GetFunctionListFunction,"GetFunctionListFunction",NULL);
+   AddUDF(theEnv,"funcall","*",1,UNBOUNDED,"*;sy",FuncallFunction,"FuncallFunction",NULL);
+   AddUDF(theEnv,"new","*",1,UNBOUNDED,"*;y",NewFunction,"NewFunction",NULL);
+   AddUDF(theEnv,"call","*",1,UNBOUNDED,"*",CallFunction,"CallFunction",NULL);
+   AddUDF(theEnv,"timer","d",0,UNBOUNDED,NULL,TimerFunction,"TimerFunction",NULL);
 
    AddUDF(theEnv,"get-error","*",0,0,NULL,GetErrorFunction,"GetErrorFunction",NULL);
    AddUDF(theEnv,"clear-error","*",0,0,NULL,ClearErrorFunction,"ClearErrorFunction",NULL);
@@ -1536,62 +1537,62 @@ void TimeFunction(
 /* ConvertTime: Function for converting */
 /*   time for local-time and gm-time.   */
 /****************************************/
-// static void ConvertTime(
-//   Environment *theEnv,
-//   UDFValue *returnValue,
-//   struct tm *info)
-//   {
-//   returnValue->begin = 0;
-//   returnValue->range = 9;
-//   returnValue->value = CreateMultifield(theEnv,9L);
-//
-//   returnValue->multifieldValue->contents[0].integerValue = CreateInteger(theEnv,info->tm_year + 1900);
-//   returnValue->multifieldValue->contents[1].integerValue = CreateInteger(theEnv,info->tm_mon + 1);
-//   returnValue->multifieldValue->contents[2].integerValue = CreateInteger(theEnv,info->tm_mday);
-//   returnValue->multifieldValue->contents[3].integerValue = CreateInteger(theEnv,info->tm_hour);
-//   returnValue->multifieldValue->contents[4].integerValue = CreateInteger(theEnv,info->tm_min);
-//   returnValue->multifieldValue->contents[5].integerValue = CreateInteger(theEnv,info->tm_sec);
-//
-//   switch (info->tm_wday)
-//     {
-//      case 0:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Sunday");
-//        break;
-//
-//      case 1:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Monday");
-//        break;
-//
-//      case 2:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Tuesday");
-//        break;
-//
-//      case 3:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Wednesday");
-//        break;
-//
-//      case 4:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Thursday");
-//        break;
-//
-//      case 5:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Friday");
-//        break;
-//
-//      case 6:
-//        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Saturday");
-//        break;
-//     }
-//
-//   returnValue->multifieldValue->contents[7].integerValue = CreateInteger(theEnv,info->tm_yday);
-//
-//   if (info->tm_isdst > 0)
-//     { returnValue->multifieldValue->contents[8].lexemeValue = TrueSymbol(theEnv); }
-//   else if (info->tm_isdst == 0)
-//     { returnValue->multifieldValue->contents[8].lexemeValue = FalseSymbol(theEnv); }
-//   else
-//     { returnValue->multifieldValue->contents[8].lexemeValue = CreateSymbol(theEnv,"UNKNOWN"); }
-  // }
+static void ConvertTime(
+  Environment *theEnv,
+  UDFValue *returnValue,
+  struct tm *info)
+  {
+   returnValue->begin = 0;
+   returnValue->range = 9;
+   returnValue->value = CreateMultifield(theEnv,9L);
+   
+   returnValue->multifieldValue->contents[0].integerValue = CreateInteger(theEnv,info->tm_year + 1900);
+   returnValue->multifieldValue->contents[1].integerValue = CreateInteger(theEnv,info->tm_mon + 1);
+   returnValue->multifieldValue->contents[2].integerValue = CreateInteger(theEnv,info->tm_mday);
+   returnValue->multifieldValue->contents[3].integerValue = CreateInteger(theEnv,info->tm_hour);
+   returnValue->multifieldValue->contents[4].integerValue = CreateInteger(theEnv,info->tm_min);
+   returnValue->multifieldValue->contents[5].integerValue = CreateInteger(theEnv,info->tm_sec);
+
+   switch (info->tm_wday)
+     {
+      case 0:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Sunday");
+        break;
+
+      case 1:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Monday");
+        break;
+
+      case 2:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Tuesday");
+        break;
+
+      case 3:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Wednesday");
+        break;
+
+      case 4:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Thursday");
+        break;
+
+      case 5:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Friday");
+        break;
+
+      case 6:
+        returnValue->multifieldValue->contents[6].lexemeValue = CreateSymbol(theEnv,"Saturday");
+        break;
+     }
+
+   returnValue->multifieldValue->contents[7].integerValue = CreateInteger(theEnv,info->tm_yday);
+
+   if (info->tm_isdst > 0)
+     { returnValue->multifieldValue->contents[8].lexemeValue = TrueSymbol(theEnv); }
+   else if (info->tm_isdst == 0)
+     { returnValue->multifieldValue->contents[8].lexemeValue = FalseSymbol(theEnv); }
+   else
+     { returnValue->multifieldValue->contents[8].lexemeValue = CreateSymbol(theEnv,"UNKNOWN"); }
+  }
 
 /*****************************************/
 /* LocalTimeFunction: H/L access routine */
@@ -1602,17 +1603,17 @@ void LocalTimeFunction(
   UDFContext *context,
   UDFValue *returnValue)
   {
-//   time_t rawtime;
-//   struct tm *info;
+   time_t rawtime;
+   struct tm *info;
 
    /*=====================*/
    /* Get the local time. */
    /*=====================*/
 
-//   time(&rawtime);
+   time(&rawtime);
 //   info = localtime(&rawtime);
 
-   //ConvertTime(theEnv,returnValue,info);
+   ConvertTime(theEnv,returnValue,info);
   }
 
 /**************************************/
@@ -1624,17 +1625,17 @@ void GMTimeFunction(
   UDFContext *context,
   UDFValue *returnValue)
   {
-//   time_t rawtime;
-//   struct tm *info;
+   time_t rawtime;
+   struct tm *info;
 
    /*=====================*/
    /* Get the local time. */
    /*=====================*/
 
-   //time(&rawtime);
+   time(&rawtime);
    //info = gmtime(&rawtime);
 
-   //ConvertTime(theEnv,returnValue,info);
+   ConvertTime(theEnv,returnValue,info);
   }
 
 /***************************************/

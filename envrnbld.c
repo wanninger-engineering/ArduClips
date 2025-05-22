@@ -155,7 +155,7 @@ Environment *CreateEnvironmentDriver(
 
    if (theData == NULL)
      {
-      sm_free(theEnvironment);
+      free(theEnvironment);
       printf("\n[ENVRNMNT6] Unable to create environment data.\n");
       return NULL;
      }
@@ -176,8 +176,8 @@ Environment *CreateEnvironmentDriver(
 
    if (theData == NULL)
      {
-      sm_free(theEnvironment->theData);
-      sm_free(theEnvironment);
+      free(theEnvironment->theData);
+      free(theEnvironment);
       printf("\n[ENVRNMNT7] Unable to create environment data.\n");
       return NULL;
      }
@@ -215,7 +215,7 @@ bool DestroyEnvironment(
         { (*theEnvironment->cleanupFunctions[i])(theEnvironment); }
      }
 
-   sm_free(theEnvironment->cleanupFunctions);
+   free(theEnvironment->cleanupFunctions);
 
    for (cleanupPtr = theEnvironment->listOfCleanupEnvironmentFunctions;
         cleanupPtr != NULL;
@@ -235,21 +235,21 @@ bool DestroyEnvironment(
      }
 
 #if (MEM_TABLE_SIZE > 0)
-   sm_free(theMemData->MemoryTable);
+   free(theMemData->MemoryTable);
 #endif
 
    for (i = 0; i < MAXIMUM_ENVIRONMENT_POSITIONS; i++)
      {
       if (theEnvironment->theData[i] != NULL)
         {
-         sm_free(theEnvironment->theData[i]);
+         free(theEnvironment->theData[i]);
          theEnvironment->theData[i] = NULL;
         }
      }
 
-   sm_free(theEnvironment->theData);
+   free(theEnvironment->theData);
 
-   sm_free(theEnvironment);
+   free(theEnvironment);
 
    return rv;
   }
@@ -266,7 +266,7 @@ static void RemoveEnvironmentCleanupFunctions(
    while (theEnv->listOfCleanupEnvironmentFunctions != NULL)
      {
       nextPtr = theEnv->listOfCleanupEnvironmentFunctions->next;
-      sm_free(theEnv->listOfCleanupEnvironmentFunctions);
+      free(theEnv->listOfCleanupEnvironmentFunctions);
       theEnv->listOfCleanupEnvironmentFunctions = nextPtr;
      }
   }

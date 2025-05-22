@@ -71,7 +71,7 @@
 #define STRICT_ALIGN_SIZE sizeof(double)
 
 #define SpecialMalloc(sz) malloc((STD_SIZE) sz)
-#define SpecialFree(ptr) sm_free(ptr)
+#define SpecialFree(ptr) free(ptr)
 
 /********************************************/
 /* InitializeMemory: Sets up memory tables. */
@@ -89,12 +89,9 @@ void InitializeMemory(
 
    if (MemoryData(theEnv)->MemoryTable == NULL)
      {
-	  printf("Memory allocation error.\r\n");
-	  while(1);
-	  PrintErrorID(theEnv,"MEMORY",1,true);
+      PrintErrorID(theEnv,"MEMORY",1,true);
       WriteString(theEnv,STDERR,"Out of memory.\n");
       ExitRouter(theEnv,EXIT_FAILURE);
-      while(1);
      }
    else
      {
@@ -182,7 +179,7 @@ void genfree(
   void *waste,
   size_t size)
   {
-   sm_free(waste);
+   free(waste);
 
    MemoryData(theEnv)->MemoryAmount -= size;
    MemoryData(theEnv)->MemoryCalls--;

@@ -109,7 +109,6 @@ struct factgenData
 void InitializeFactReteFunctions(
   Environment *theEnv)
   {
-    
 #if DEFRULE_CONSTRUCT
    struct entityRecord   factJNGV1Info = { "FACT_JN_VAR1", FACT_JN_VAR1,0,1,0,
                                                   PrintFactJNGetVar1,
