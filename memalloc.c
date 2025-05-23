@@ -70,8 +70,8 @@
 
 #define STRICT_ALIGN_SIZE sizeof(double)
 
-#define SpecialMalloc(sz) malloc((STD_SIZE) sz)
-#define SpecialFree(ptr) free(ptr)
+#define SpecialMalloc(sz) MALLOC_IMPL((STD_SIZE) sz)
+#define SpecialFree(ptr)FREE_IMPL(ptr)
 
 /********************************************/
 /* InitializeMemory: Sets up memory tables. */
@@ -85,7 +85,7 @@ void InitializeMemory(
 
 #if (MEM_TABLE_SIZE > 0)
    MemoryData(theEnv)->MemoryTable = (struct memoryPtr **)
-                 malloc((STD_SIZE) (sizeof(struct memoryPtr *) * MEM_TABLE_SIZE));
+                 MALLOC_IMPL((STD_SIZE) (sizeof(struct memoryPtr *) * MEM_TABLE_SIZE));
 
    if (MemoryData(theEnv)->MemoryTable == NULL)
      {
@@ -113,21 +113,21 @@ void *genalloc(
   {
    void *memPtr;
 
-   memPtr = malloc(size);
+   memPtr = MALLOC_IMPL(size);
 
    if (memPtr == NULL)
      {
       ReleaseMem(theEnv,(long long) ((size * 5 > 4096) ? size * 5 : 4096));
-      memPtr = malloc(size);
+      memPtr = MALLOC_IMPL(size);
       if (memPtr == NULL)
         {
          ReleaseMem(theEnv,-1);
-         memPtr = malloc(size);
+         memPtr = MALLOC_IMPL(size);
          while (memPtr == NULL)
            {
             if ((*MemoryData(theEnv)->OutOfMemoryCallback)(theEnv,size))
               return NULL;
-            memPtr = malloc(size);
+            memPtr = MALLOC_IMPL(size);
            }
         }
      }
@@ -179,7 +179,7 @@ void genfree(
   void *waste,
   size_t size)
   {
-   free(waste);
+  FREE_IMPL(waste);
 
    MemoryData(theEnv)->MemoryAmount -= size;
    MemoryData(theEnv)->MemoryCalls--;

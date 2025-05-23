@@ -1486,7 +1486,7 @@ char *SBCopy(
   {
    char *stringCopy;
 
-   stringCopy = (char *) malloc(strlen(theSB->contents) + 1);
+   stringCopy = (char *) MALLOC_IMPL(strlen(theSB->contents) + 1);
    strcpy(stringCopy,theSB->contents);
 
    return stringCopy;

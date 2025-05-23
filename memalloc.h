@@ -67,7 +67,7 @@ struct memoryPtr;
 typedef bool OutOfMemoryFunction(Environment *,size_t);
 
 #ifndef MEM_TABLE_SIZE
-#define MEM_TABLE_SIZE 500
+#define MEM_TABLE_SIZE 200
 #endif
 
 struct memoryPtr

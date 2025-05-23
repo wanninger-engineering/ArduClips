@@ -97,7 +97,7 @@ struct savedContexts
    struct savedContexts *nxt;
   };
 
-#define EXPRESSION_HASH_SIZE 503
+#define EXPRESSION_HASH_SIZE 63
 
 /********************/
 /* ENVIRONMENT DATA */

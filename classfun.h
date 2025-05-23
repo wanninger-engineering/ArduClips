@@ -63,7 +63,7 @@
 #define SetTraversalID(traversalRecord,id) SetBitMap(traversalRecord,id)
 #define ClearTraversalID(traversalRecord,id) ClearBitMap(traversalRecord,id)
 
-#define CLASS_TABLE_HASH_SIZE     167 // TBD Larger?
+#define CLASS_TABLE_HASH_SIZE     63 // TBD Larger?
 #define SLOT_NAME_TABLE_HASH_SIZE 167 // TBD Larger?
 
 #define ISA_ID  0

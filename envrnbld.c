@@ -143,7 +143,7 @@ Environment *CreateEnvironmentDriver(
    struct environmentData *theEnvironment;
    void *theData;
 
-   theEnvironment = (struct environmentData *) malloc(sizeof(struct environmentData));
+   theEnvironment = (struct environmentData *) MALLOC_IMPL(sizeof(struct environmentData));
 
    if (theEnvironment == NULL)
      {
@@ -151,11 +151,11 @@ Environment *CreateEnvironmentDriver(
       return NULL;
      }
 
-   theData = malloc(sizeof(void *) * MAXIMUM_ENVIRONMENT_POSITIONS);
+   theData = MALLOC_IMPL(sizeof(void *) * MAXIMUM_ENVIRONMENT_POSITIONS);
 
    if (theData == NULL)
      {
-      free(theEnvironment);
+     FREE_IMPL(theEnvironment);
       printf("\n[ENVRNMNT6] Unable to create environment data.\n");
       return NULL;
      }
@@ -172,12 +172,12 @@ Environment *CreateEnvironmentDriver(
    /* Allocate storage for the cleanup functions. */
    /*=============================================*/
 
-   theData = malloc(sizeof(void (*)(struct environmentData *)) * MAXIMUM_ENVIRONMENT_POSITIONS);
+   theData = MALLOC_IMPL(sizeof(void (*)(struct environmentData *)) * MAXIMUM_ENVIRONMENT_POSITIONS);
 
    if (theData == NULL)
      {
-      free(theEnvironment->theData);
-      free(theEnvironment);
+     FREE_IMPL(theEnvironment->theData);
+     FREE_IMPL(theEnvironment);
       printf("\n[ENVRNMNT7] Unable to create environment data.\n");
       return NULL;
      }
@@ -215,7 +215,7 @@ bool DestroyEnvironment(
         { (*theEnvironment->cleanupFunctions[i])(theEnvironment); }
      }
 
-   free(theEnvironment->cleanupFunctions);
+  FREE_IMPL(theEnvironment->cleanupFunctions);
 
    for (cleanupPtr = theEnvironment->listOfCleanupEnvironmentFunctions;
         cleanupPtr != NULL;
@@ -235,21 +235,21 @@ bool DestroyEnvironment(
      }
 
 #if (MEM_TABLE_SIZE > 0)
-   free(theMemData->MemoryTable);
+  FREE_IMPL(theMemData->MemoryTable);
 #endif
 
    for (i = 0; i < MAXIMUM_ENVIRONMENT_POSITIONS; i++)
      {
       if (theEnvironment->theData[i] != NULL)
         {
-         free(theEnvironment->theData[i]);
+        FREE_IMPL(theEnvironment->theData[i]);
          theEnvironment->theData[i] = NULL;
         }
      }
 
-   free(theEnvironment->theData);
+  FREE_IMPL(theEnvironment->theData);
 
-   free(theEnvironment);
+  FREE_IMPL(theEnvironment);
 
    return rv;
   }
@@ -266,7 +266,7 @@ static void RemoveEnvironmentCleanupFunctions(
    while (theEnv->listOfCleanupEnvironmentFunctions != NULL)
      {
       nextPtr = theEnv->listOfCleanupEnvironmentFunctions->next;
-      free(theEnv->listOfCleanupEnvironmentFunctions);
+     FREE_IMPL(theEnv->listOfCleanupEnvironmentFunctions);
       theEnv->listOfCleanupEnvironmentFunctions = nextPtr;
      }
   }

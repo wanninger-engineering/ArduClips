@@ -447,6 +447,10 @@
 #define DEVELOPER 0
 #endif
 
+#ifndef EMBEDDED
+#define EMBEDDED 1
+#endif
+
 #if DEVELOPER
 #include <assert.h>
 #define Bogus(x) assert(! (x))

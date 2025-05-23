@@ -5,3 +5,6 @@
    /*                                                     */
    /*               USER SETUP HEADER FILE                */
    /*******************************************************/
+#include "smalloc.h"
+#define MALLOC_IMPL malloc
+#define FREE_IMPL free

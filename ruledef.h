@@ -118,7 +118,7 @@ struct defruleModule
   };
 
 #ifndef ALPHA_MEMORY_HASH_SIZE
-#define ALPHA_MEMORY_HASH_SIZE       63559L
+#define ALPHA_MEMORY_HASH_SIZE       8191L
 #endif
 
 #define DEFRULE_DATA 16
