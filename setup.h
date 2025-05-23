@@ -213,7 +213,7 @@
 /************************************************************/
 
 #ifndef FACT_SET_QUERIES
-#define FACT_SET_QUERIES 0
+#define FACT_SET_QUERIES 1
 #endif
 
 #if ! DEFTEMPLATE_CONSTRUCT
@@ -250,7 +250,7 @@
 /**********************************************/
 
 #ifndef DEFFUNCTION_CONSTRUCT
-#define DEFFUNCTION_CONSTRUCT 0
+#define DEFFUNCTION_CONSTRUCT 1
 #endif
 
 /*********************************************/
@@ -417,7 +417,7 @@
 /*********************************************/
 
 #ifndef MULTIFIELD_FUNCTIONS
-#define MULTIFIELD_FUNCTIONS 0
+#define MULTIFIELD_FUNCTIONS 1
 #endif
 
 /****************************************************/
