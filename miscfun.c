@@ -166,7 +166,7 @@ void MiscFunctionDefinitions(
    MiscFunctionData(theEnv)->errorCode.lexemeValue = FalseSymbol(theEnv);
    Retain(theEnv,MiscFunctionData(theEnv)->errorCode.header);
 
-#if ! RUN_TIME
+#if ((! RUN_TIME) && (! EMBEDDED))
    AddUDF(theEnv,"exit","v",0,1,"l",ExitCommand,"ExitCommand",NULL);
 
    AddUDF(theEnv,"gensym","y",0,0,NULL,GensymFunction,"GensymFunction",NULL);

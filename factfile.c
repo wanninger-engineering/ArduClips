@@ -110,7 +110,7 @@ struct bsaveSlotValueAtom
 void FactFileCommandDefinitions(
   Environment *theEnv)
   {
-#if (! RUN_TIME)
+#if ( (! RUN_TIME) && (! EMBEDDED))
    AddUDF(theEnv,"save-facts","l",1,UNBOUNDED,"y;sy",SaveFactsCommand,"SaveFactsCommand",NULL);
    AddUDF(theEnv,"load-facts","l",1,1,"sy",LoadFactsCommand,"LoadFactsCommand",NULL);
    

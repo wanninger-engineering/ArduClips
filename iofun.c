@@ -182,7 +182,7 @@ void IOFunctionDefinitions(
    IncrementLexemeCount(IOFunctionData(theEnv)->locale);
 #endif
 
-#if ! RUN_TIME
+#if ((! RUN_TIME) && (! EMBEDDED))
 #if IO_FUNCTIONS
    AddUDF(theEnv,"printout","v",1,UNBOUNDED,"*;ldsyn",PrintoutFunction,"PrintoutFunction",NULL);
    AddUDF(theEnv,"print","v",0,UNBOUNDED,NULL,PrintFunction,"PrintFunction",NULL);

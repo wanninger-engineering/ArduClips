@@ -104,7 +104,7 @@ void ConstructProfilingFunctionDefinitions(
    ProfileFunctionData(theEnv)->PercentThreshold = 0.0;
    ProfileFunctionData(theEnv)->OutputString = OUTPUT_STRING;
 
-#if ! RUN_TIME
+#if ((! RUN_TIME) && (! EMBEDDED))
    AddUDF(theEnv,"profile","v",1,1,"y",ProfileCommand,"ProfileCommand",NULL);
    AddUDF(theEnv,"profile-info","v",0,0,NULL, ProfileInfoCommand,"ProfileInfoCommand",NULL);
    AddUDF(theEnv,"profile-reset","v",0,0,NULL,ProfileResetCommand,"ProfileResetCommand",NULL);

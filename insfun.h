@@ -87,7 +87,7 @@ typedef struct igarbage
    struct igarbage *nxt;
   } IGARBAGE;
 
-#define INSTANCE_TABLE_HASH_SIZE 8191
+#define INSTANCE_TABLE_HASH_SIZE 1023
 #define InstanceSizeHeuristic(ins)      sizeof(Instance)
 
    void                           RetainInstance(Instance *);

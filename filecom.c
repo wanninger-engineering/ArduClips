@@ -108,7 +108,7 @@ void FileCommandDefinitions(
   {
    AllocateEnvironmentData(theEnv,FILECOM_DATA,sizeof(struct fileCommandData),DeallocateFileCommandData);
 
-#if ! RUN_TIME
+#if ((! RUN_TIME) && (! EMBEDDED))
 #if DEBUGGING_FUNCTIONS
    AddUDF(theEnv,"batch","b",1,1,"sy",BatchCommand,"BatchCommand",NULL);
    AddUDF(theEnv,"batch*","b",1,1,"sy",BatchStarCommand,"BatchStarCommand",NULL);
