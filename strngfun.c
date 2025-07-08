@@ -129,6 +129,7 @@ void StringFunctionDefinitions(
   {
 #if ! RUN_TIME
    AddUDF(theEnv,"eval","*",1,1,"sy",EvalFunction,"EvalFunction",NULL);
+   AddUDF(theEnv,"build","b",1,1,"sy",BuildFunction,"BuildFunction",NULL);
 #if ! EMBEDDED
    AddUDF(theEnv,"str-cat","sy",1,UNBOUNDED,"synld" ,StrCatFunction,"StrCatFunction",NULL);
    AddUDF(theEnv,"sym-cat","sy",1,UNBOUNDED,"synld" ,SymCatFunction,"SymCatFunction",NULL);
@@ -138,7 +139,6 @@ void StringFunctionDefinitions(
    AddUDF(theEnv,"lowcase","syn",1,1,"syn",LowcaseFunction,"LowcaseFunction",NULL);
    AddUDF(theEnv,"sub-string","s",3,3,"*;l;l;syn",SubStringFunction,"SubStringFunction",NULL);
    AddUDF(theEnv,"str-index","bl",2,2,"syn",StrIndexFunction,"StrIndexFunction",NULL);
-   AddUDF(theEnv,"build","b",1,1,"sy",BuildFunction,"BuildFunction",NULL);
    AddUDF(theEnv,"string-to-field","*",1,1,"syn",StringToFieldFunction,"StringToFieldFunction",NULL);
    AddUDF(theEnv,"str-replace","syn",3,3,"syn",StrReplaceFunction,"StrReplaceFunction",NULL);
 #endif

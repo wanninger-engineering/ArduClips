@@ -67,7 +67,7 @@ struct patternNodeHashEntry
    struct patternNodeHashEntry *next;
   };
 
-#define SIZE_PATTERN_HASH 16231
+#define SIZE_PATTERN_HASH 8191
 
 struct alphaMemoryHash
   {

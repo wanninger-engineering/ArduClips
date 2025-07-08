@@ -64,7 +64,7 @@ struct factHashEntry
    FactHashEntry *next;
   };
 
-#define SIZE_FACT_HASH 16231
+#define SIZE_FACT_HASH 8191
 
    void                           AddHashedFact(Environment *,Fact *,size_t);
    bool                           RemoveHashedFact(Environment *,Fact *);

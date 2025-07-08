@@ -213,7 +213,7 @@
 /************************************************************/
 
 #ifndef FACT_SET_QUERIES
-#define FACT_SET_QUERIES 1
+#define FACT_SET_QUERIES 0
 #endif
 
 #if ! DEFTEMPLATE_CONSTRUCT
@@ -227,7 +227,7 @@
 /****************************************************/
 
 #ifndef DEFFACTS_CONSTRUCT
-#define DEFFACTS_CONSTRUCT 1
+#define DEFFACTS_CONSTRUCT 0
 #endif
 
 #if ! DEFTEMPLATE_CONSTRUCT
@@ -241,7 +241,7 @@
 /************************************************/
 
 #ifndef DEFGLOBAL_CONSTRUCT
-#define DEFGLOBAL_CONSTRUCT 1
+#define DEFGLOBAL_CONSTRUCT 0
 #endif
 
 /**********************************************/
@@ -250,7 +250,7 @@
 /**********************************************/
 
 #ifndef DEFFUNCTION_CONSTRUCT
-#define DEFFUNCTION_CONSTRUCT 1
+#define DEFFUNCTION_CONSTRUCT 0
 #endif
 
 /*********************************************/
@@ -292,7 +292,7 @@
 /********************************************************************/
 
 #ifndef INSTANCE_SET_QUERIES
-#define INSTANCE_SET_QUERIES 1
+#define INSTANCE_SET_QUERIES 0
 #endif
 
 #if ! OBJECT_SYSTEM
